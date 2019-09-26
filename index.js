@@ -27,6 +27,8 @@ function readfile() {
   });
 }
 
+setInterval(readfile, 900000);
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -95,6 +97,8 @@ function listMajors(auth) {
     {
       spreadsheetId: "1Ijo_wGMY7m7JUOh_EmjIk_cHhM4f0Hozr5gF7Rz4GC4",
       range: "Trang tính1!A3:G"
+      // spreadsheetId: "1yDSQDWxlH6QRTkalbKcO7-X1YGzlnos_icP4l7RCXf8",
+      // range: "Sheet3!A3:F"
     },
     (err, res) => {
       if (err) return console.log("The API returned an error: " + err);
@@ -125,7 +129,6 @@ client.on("message", msg => {
   if (msg.content === "ping") {
     msg.reply("Pong!");
   } else if (msg.content === "time") {
-    readfile();
     msg.reply(
       `${bossTime.map(x => {
         return `\n${x}`;

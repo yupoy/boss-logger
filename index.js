@@ -19,6 +19,14 @@ fs.readFile("credentials.json", (err, content) => {
   authorize(JSON.parse(content), listMajors);
 });
 
+function readfile() {
+  fs.readFile("credentials.json", (err, content) => {
+    if (err) return console.log("Error loading client secret file:", err);
+    // Authorize a client with credentials, then call the Google Sheets API.
+    authorize(JSON.parse(content), listMajors);
+  });
+}
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -93,6 +101,7 @@ function listMajors(auth) {
       const rows = res.data.values;
       const rows2 = rows.slice(0, 13);
       if (rows.length) {
+        bossTime = [];
         // console.log("Name, Major:");
         // console.log(rows);
         // Print columns A and E, which correspond to indices 0 and 4.
@@ -116,8 +125,7 @@ client.on("message", msg => {
   if (msg.content === "ping") {
     msg.reply("Pong!");
   } else if (msg.content === "time") {
-    bossTime = [];
-    listMajors(auth);
+    readfile();
     msg.reply(
       `${bossTime.map(x => {
         return `\n${x}`;

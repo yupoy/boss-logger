@@ -3,7 +3,7 @@ const readline = require("readline");
 const { google } = require("googleapis");
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const bossTime = [];
+let bossTime = [];
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
@@ -116,6 +116,8 @@ client.on("message", msg => {
   if (msg.content === "ping") {
     msg.reply("Pong!");
   } else if (msg.content === "time") {
+    bossTime = [];
+    listMajors(auth);
     msg.reply(
       `${bossTime.map(x => {
         return `\n${x}`;

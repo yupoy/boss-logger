@@ -8,7 +8,7 @@ let startTime = "";
 let currentTime = "";
 let today = new Date();
 
-currentTime = today.getHours() + 8 + ":" + today.getMinutes() + 15;
+currentTime = today.getHours() + 8 + ":" + today.getMinutes();
 // currentTime = today.getHours() + 1 + ":" + today.getMinutes();
 
 // If modifying these scopes, delete token.json.

@@ -36,7 +36,11 @@ setInterval(updaterealTime, 1000);
 
 function updaterealTime() {
   let today = new Date();
-  currentTime = today.getHours() + 8 + ":" + today.getMinutes();
+  if (today.getHours() >= 16) {
+    currentTime = today.getHours() + 8 - 24 + ":" + today.getMinutes();
+  } else {
+    currentTime = today.getHours() + 8 + ":" + today.getMinutes();
+  }
 }
 
 function parseTime(s) {

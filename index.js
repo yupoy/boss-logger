@@ -49,7 +49,11 @@ function parseTime(s) {
 }
 
 function timetoSpawn() {
-  return parseTime(startTime) - parseTime(currentTime);
+  if (parseTime(currentTime) < 720) {
+    return parseTime(startTime) - 720 - parseTime(currentTime);
+  } else {
+    return parseTime(startTime) - parseTime(currentTime);
+  }
 }
 
 function notifSpawn(msg) {

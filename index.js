@@ -6,7 +6,6 @@ const client = new Discord.Client();
 let bossTime = [];
 let startTime = "";
 let currentTime = "";
-let today = new Date();
 
 // currentTime = today.getHours() + 1 + ":" + today.getMinutes();
 
@@ -33,9 +32,10 @@ function readfile() {
 }
 
 setInterval(readfile, 900000);
-setInterval(updaterealTime, 60000);
+setInterval(updaterealTime, 1000);
 
 function updaterealTime() {
+  let today = new Date();
   currentTime = today.getHours() + 8 + ":" + today.getMinutes();
 }
 

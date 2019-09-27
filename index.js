@@ -161,6 +161,8 @@ client.on("message", msg => {
   ) {
     setInterval(notifSpawn, 600000, msg);
     msg.channel.send("Done");
+  } else if (msg.content === "next") {
+    msg.channel.send(`Next FB will start in ${timetoSpawn()} minutes`);
   }
 });
 

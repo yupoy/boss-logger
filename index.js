@@ -49,7 +49,7 @@ function timetoSpawn() {
 }
 
 function notifSpawn(msg) {
-  if (timetoSpawn() <= 10 && timetoSpawn() >= 0) {
+  if (timetoSpawn() === 10) {
     msg.channel.send(`FB will start in ${timetoSpawn()} minutes @everyone`);
   }
 }
@@ -159,7 +159,7 @@ client.on("message", msg => {
     msg.content === "setNotif" &&
     msg.member.id === "136850675530334208"
   ) {
-    setInterval(notifSpawn, 600000, msg);
+    setInterval(notifSpawn, 60000, msg);
     msg.channel.send("Done");
   } else if (msg.content === "next") {
     msg.channel.send(`Next FB will start in ${timetoSpawn()} minutes`);

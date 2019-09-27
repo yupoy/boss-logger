@@ -8,7 +8,6 @@ let startTime = "";
 let currentTime = "";
 let today = new Date();
 
-currentTime = today.getHours() + 8 + ":" + today.getMinutes();
 // currentTime = today.getHours() + 1 + ":" + today.getMinutes();
 
 // If modifying these scopes, delete token.json.
@@ -34,6 +33,11 @@ function readfile() {
 }
 
 setInterval(readfile, 900000);
+setInterval(updaterealTime, 60000);
+
+function updaterealTime() {
+  currentTime = today.getHours() + 8 + ":" + today.getMinutes();
+}
 
 function parseTime(s) {
   let c = s.split(":");

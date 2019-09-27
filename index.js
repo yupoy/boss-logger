@@ -4,6 +4,14 @@ const { google } = require("googleapis");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 let bossTime = [];
+let startTime = "";
+let currentTime = "";
+let today = new Date();
+// if (today.getHours() >= 12) {
+// currentTime = today.getHours() - 12 + ":" + today.getMinutes();
+// } else {
+currentTime = today.getHours() + ":" + today.getMinutes();
+// }
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
@@ -28,6 +36,21 @@ function readfile() {
 }
 
 setInterval(readfile, 900000);
+
+function parseTime(s) {
+  let c = s.split(":");
+  return parseInt(c[0]) * 60 + parseInt(c[1]);
+}
+
+function timetoSpawn() {
+  return parseTime(startTime) - parseTime(currentTime);
+}
+
+function notifSpawn(msg) {
+  if (timetoSpawn() <= 10 && timetoSpawn() >= 0) {
+    msg.channel.send(`FB will start in ${timetoSpawn()} minutes @everyone`);
+  }
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -106,14 +129,10 @@ function listMajors(auth) {
       const rows2 = rows.slice(0, 13);
       if (rows.length) {
         bossTime = [];
-        // console.log("Name, Major:");
-        // console.log(rows);
-        // Print columns A and E, which correspond to indices 0 and 4.
+        startTime = parseInt(rows2[0][4]) + 12 + ":" + rows2[0][5];
         rows2.map(row => {
           bossTime.push(`${row[0]} ${row[4]}:${row[5]}:${row[6]}`);
-          // console.log(`${row[0]}, ${row[4]}, ${row[5]}, ${row[6]}`);
         });
-        // console.log(bossTime);
       } else {
         console.log("No data found.");
       }
@@ -127,13 +146,19 @@ client.on("ready", () => {
 
 client.on("message", msg => {
   if (msg.content === "ping") {
-    msg.reply("Pong!");
+    msg.reply(`Pong! ${currenTime}`);
   } else if (msg.content === "time") {
-    msg.reply(
+    msg.channel.send(
       `${bossTime.map(x => {
         return `\n${x}`;
       })}`
     );
+  } else if (
+    msg.content === "setNotif" &&
+    msg.member.id === "136850675530334208"
+  ) {
+    setInterval(notifSpawn, 600000, msg);
+    msg.channel.send("Done");
   }
 });
 

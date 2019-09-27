@@ -146,7 +146,7 @@ client.on("ready", () => {
 
 client.on("message", msg => {
   if (msg.content === "ping") {
-    msg.reply(`Pong! ${currenTime}`);
+    msg.reply(`Pong! ${currentTime}`);
   } else if (msg.content === "time") {
     msg.channel.send(
       `${bossTime.map(x => {

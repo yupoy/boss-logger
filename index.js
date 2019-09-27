@@ -7,11 +7,8 @@ let bossTime = [];
 let startTime = "";
 let currentTime = "";
 let today = new Date();
-// if (today.getHours() >= 12) {
-// currentTime = today.getHours() - 12 + ":" + today.getMinutes();
-// } else {
-currentTime = today.getHours() + ":" + today.getMinutes();
-// }
+
+currentTime = today.getHours() + 8 + ":" + today.getMinutes();
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];

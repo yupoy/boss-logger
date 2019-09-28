@@ -31,7 +31,7 @@ function readfile() {
   });
 }
 
-setInterval(readfile, 900000);
+setInterval(readfile, 600000);
 setInterval(updaterealTime, 1000);
 
 function updaterealTime() {
@@ -57,7 +57,7 @@ function timetoSpawn() {
 }
 
 function notifSpawn(msg) {
-  if (timetoSpawn() === 10) {
+  if (timetoSpawn() <= 10 && timetoSpawn() >= 9) {
     msg.channel.send(`FB will start in ${timetoSpawn()} minutes @everyone`);
   }
 }

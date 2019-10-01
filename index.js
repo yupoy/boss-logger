@@ -49,7 +49,7 @@ function parseTime(s) {
 }
 
 function timetoSpawn() {
-  if (parseTime(currentTime) < 720) {
+  if (parseTime(currentTime) < 780) {
     return parseTime(startTime) - 720 - parseTime(currentTime);
   } else {
     return parseTime(startTime) - parseTime(currentTime);

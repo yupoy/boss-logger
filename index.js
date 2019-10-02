@@ -139,7 +139,7 @@ function listMajors(auth) {
       const rows2 = rows.slice(0, 13);
       if (rows.length) {
         bossTime = [];
-        startTime = parseInt(rows2[0][4]) + 12 + ":" + rows2[0][5];
+        startTime = parseInt(rows2[0][4]) + ":" + rows2[0][5];
         rows2.map(row => {
           bossTime.push(`${row[0]} ${row[4]}:${row[5]}:${row[6]}`);
         });

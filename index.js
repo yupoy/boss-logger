@@ -38,6 +38,8 @@ function updaterealTime() {
   let today = new Date();
   if (today.getHours() >= 16) {
     currentTime = today.getHours() + 8 - 24 + ":" + today.getMinutes();
+  } else if (today.getHours() === 4) {
+    currentTime = today.getHours() - 4 + ":" + today.getMinutes();
   } else {
     currentTime = today.getHours() + 8 + ":" + today.getMinutes();
   }

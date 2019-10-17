@@ -6,6 +6,7 @@ const client = new Discord.Client();
 let bossTime = [];
 let startTime = "";
 let currentTime = "";
+let sendChannel = {};
 
 // currentTime = today.getHours() + 1 + ":" + today.getMinutes();
 
@@ -54,13 +55,17 @@ function timetoSpawn() {
   // if (parseTime(currentTime) < 780) {
   //   return parseTime(startTime) - 720 - parseTime(currentTime);
   // } else {
-  return parseTime(startTime) - parseTime(currentTime);
+  if (parseTime(currentTime) >= 660 && parseTime(startTime) <= 60) {
+    return parseTime(startTime) - parseTime(currentTime) + 120;
+  } else {
+    return parseTime(startTime) - parseTime(currentTime);
+  }
   // }
 }
 
 function notifSpawn(msg) {
   if (timetoSpawn() === 10) {
-    msg.channel.send(`FB will start in ${timetoSpawn()} minutes @everyone`);
+    msg.send(`FB will start in ${timetoSpawn()} minutes @everyone`);
   }
 }
 
@@ -130,7 +135,7 @@ function listMajors(auth) {
   const sheets = google.sheets({ version: "v4", auth });
   sheets.spreadsheets.values.get(
     {
-      spreadsheetId: "1Ijo_wGMY7m7JUOh_EmjIk_cHhM4f0Hozr5gF7Rz4GC4",
+      spreadsheetId: "1TpJ6BdP870V1TFXTKG5kB5IAH6y23yvOKODJev38D0o",
       range: "Trang tính1!A3:G"
       // spreadsheetId: "1yDSQDWxlH6QRTkalbKcO7-X1YGzlnos_icP4l7RCXf8",
       // range: "Sheet3!A3:F"
@@ -153,6 +158,8 @@ function listMajors(auth) {
 }
 
 client.on("ready", () => {
+  sendChannel = client.channels.get("626561241577553943");
+  setInterval(notifSpawn, 59000, sendChannel);
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
@@ -166,9 +173,12 @@ client.on("message", msg => {
       })}`
     );
   } else if (
-    msg.content === "setNotif" &&
+    msg.content === "reset" &&
     msg.member.id === "136850675530334208"
   ) {
+    clearInterval();
+    setInterval(readfile, 600000);
+    setInterval(updaterealTime, 1000);
     setInterval(notifSpawn, 59000, msg);
     msg.channel.send("Done");
   } else if (msg.content === "next") {

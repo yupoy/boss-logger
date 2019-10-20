@@ -158,7 +158,7 @@ function listMajors(auth) {
 }
 
 client.on("ready", () => {
-  sendChannel = client.channels.get("626561241577553943");
+  sendChannel = client.channels.get("635140827563425842");
   setInterval(notifSpawn, 59000, sendChannel);
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -182,6 +182,7 @@ client.on("message", msg => {
     setInterval(notifSpawn, 59000, msg);
     msg.channel.send("Done");
   } else if (msg.content === "next") {
+    console.log(msg.channel);
     msg.channel.send(`Next FB will start in ${timetoSpawn()} minutes`);
   }
 });
